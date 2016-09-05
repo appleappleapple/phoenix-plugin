@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+<!--  id :表示指定哪个库 -->
+<!--  driver:表示驱动 -->
+<!--  url:表示连接的地址 -->
+
+	<datasources>
+	<!--  数据源1,uba代码库名 -->
+		<datasourceconfig>
+		<id>uba</id>
+		<driver>org.apache.phoenix.jdbc.PhoenixDriver</driver>
+		<url>jdbc:phoenix:sach01-002,sach01-003,sach01-004</url>
+		</datasourceconfig>
+		
+		 <!--  数据源2,ababc代码库名 -->
+	    <datasourceconfig>
+		<id>abc</id>
+		<driver>org.apache.phoenix.jdbc.PhoenixDriver</driver>
+		<url>jdbc:phoenix:sach01-002,sach01-003,sach01-004</url>
+	   </datasourceconfig>
+	</datasources>
+</config>

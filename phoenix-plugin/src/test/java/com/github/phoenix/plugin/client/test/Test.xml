@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Test>
+	<name>john</name>
+	<age>30</age>
+	<names>
+		<name>j</name>
+		<name>h</name>
+		<name>k</name>
+	</names>
+</Test>
