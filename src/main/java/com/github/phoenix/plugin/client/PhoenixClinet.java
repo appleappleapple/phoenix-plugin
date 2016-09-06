@@ -76,7 +76,7 @@ public class PhoenixClinet extends PhoenixCommon implements PhoenixBase {
 
 			Connection connection = null;
 			PreparedStatement preState = null;
-sss
+
 			try {
 				connection = connectionFactory.getConnection(id);
 				preState = connection.prepareStatement(sql);
