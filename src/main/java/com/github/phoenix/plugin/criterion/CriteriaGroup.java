@@ -1,6 +1,5 @@
 package com.github.phoenix.plugin.criterion;
 
-import com.mucfc.urpp.common.exception.CriteriaException;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -33,12 +32,12 @@ class CriteriaGroup extends Criteria {
      *
      * @param operator 二元运算符, 如 "AND","OR"
      */
-    public CriteriaGroup(String operator) {
+    public CriteriaGroup(String operator) throws Exception{
         operator = operator.toUpperCase();
 
         // CriteriaGroup只支持如下运算符:'AND','OR' 。
         if (!opSet.contains(operator)) {
-            new CriteriaException(CriteriaException.NOT_SUPPORTED_OP);
+            throw new Exception("CriteriaGroup只支持如下运算符:'AND','OR'！");
         }
 
         this.op = operator;
@@ -49,9 +48,9 @@ class CriteriaGroup extends Criteria {
      *
      * @param c 子条件表达示
      */
-    public CriteriaGroup add(Criteria c) throws CriteriaException {
+    public CriteriaGroup add(Criteria c) throws Exception{
         if (c == this) {
-            throw new CriteriaException(CriteriaException.CANNOT_ADD_THIS);
+            throw new Exception("条件表达式发生逻辑错误，不能加入自身作为子条件！");
         }
         vec.add(c);
         return this;
@@ -62,9 +61,9 @@ class CriteriaGroup extends Criteria {
      *
      * @param c 子条件表达示
      */
-    public CriteriaGroup remove(Criteria c) throws CriteriaException {
+    public CriteriaGroup remove(Criteria c) throws Exception {
         if (!vec.contains(c)) {
-            throw new CriteriaException(CriteriaException.REMOVE_NOTEXIST);
+            throw new Exception("条件表达式发生逻辑错误，要删除的子条件不存在！");
         }
         vec.remove(c);
         return this;
