@@ -29,6 +29,7 @@ public class PhoenixClinet extends PhoenixCommon implements PhoenixBase {
 	public PhoenixClinet(String id) {
 		Connection connection = null;
 		try {
+			logger.info(">>11");
 			connection = connectionFactory.getConnection(id);
 
 			if (connection == null) {
@@ -36,9 +37,14 @@ public class PhoenixClinet extends PhoenixCommon implements PhoenixBase {
 				throw new Exception("not find connection for id " + id);
 			}
 
+			logger.info(">>22");
+
 			this.id = id;
 
 			logger.debug("connection info is {}", connectionFactory.getConnection(id).toString());
+
+			logger.info(">>33");
+
 		} catch (Exception e) {
 			logger.error("init connection error = {}", e.getLocalizedMessage());
 		} finally {
@@ -70,7 +76,7 @@ public class PhoenixClinet extends PhoenixCommon implements PhoenixBase {
 
 			Connection connection = null;
 			PreparedStatement preState = null;
-
+sss
 			try {
 				connection = connectionFactory.getConnection(id);
 				preState = connection.prepareStatement(sql);
