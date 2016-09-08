@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github</groupId>
 	<artifactId>phoenix-plugin</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<properties>
 		<phoenix.client.version>4.3.0</phoenix.client.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
