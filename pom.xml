@@ -3,8 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github</groupId>
 	<artifactId>phoenix-plugin</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-
+	<version>0.0.2-SNAPSHOT</version>
 	<properties>
 		<phoenix.client.version>4.3.0</phoenix.client.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -12,14 +11,13 @@
 		<file.encoding>utf-8</file.encoding>
 	</properties>
 
-	<!-- <repositories> -->
-	<!-- <repository> -->
-	<!-- <id>apache release</id> -->
-	<!-- <url>https://repository.apache.org/content/repositories/releases/</url> -->
-	<!-- </repository> -->
-	<!-- </repositories> -->
-
 	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
@@ -55,33 +53,10 @@
 			<groupId>org.apache.phoenix</groupId>
 			<artifactId>phoenix-client</artifactId>
 			<version>${phoenix.client.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>joda-time</groupId>
-					<artifactId>joda-time</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
-		<dependency>
-			<groupId>joda-time</groupId>
-			<artifactId>joda-time</artifactId>
-			<version>2.8.2</version>
-		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>org.apache.phoenix</groupId> -->
-		<!-- <artifactId>phoenix-core</artifactId> -->
-		<!-- <version>4.3.1</version> -->
-		<!-- </dependency> -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.apache.phoenix</groupId> -->
-		<!-- <artifactId>phoenix-core</artifactId> -->
-		<!-- <version>4.3.0</version> -->
-		<!-- </dependency> -->
-
 	</dependencies>
 
 	<build>
-
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
