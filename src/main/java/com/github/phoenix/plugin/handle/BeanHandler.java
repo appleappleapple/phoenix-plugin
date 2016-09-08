@@ -4,6 +4,9 @@ import java.lang.reflect.Field;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * 
  * 功能概要：返回单个bean对象
@@ -12,6 +15,8 @@ import java.sql.ResultSetMetaData;
  * @since  2016年8月30日
  */
 public class BeanHandler implements ResultSetHandler {
+	
+	private static final Logger logger = LoggerFactory.getLogger(BeanHandler.class);
 
 	private Class clazz;
 
@@ -33,11 +38,16 @@ public class BeanHandler implements ResultSetHandler {
 			for (int i = 0; i < count; i++) {
 				String name = meta.getColumnName(i + 1); // 获取到结果集每列的列名 id
 				Object value = rs.getObject(name); // 1
-
-				// 反射出bean上与列名相应的属性
-				Field f = bean.getClass().getDeclaredField(name);
-				f.setAccessible(true);
-				f.set(bean, value);
+				
+                try {
+                	Field f = bean.getClass().getDeclaredField(name);
+					if (f != null) {
+						f.setAccessible(true);
+						f.set(bean, value);	
+					}
+                } catch (NoSuchFieldException e) {
+                	logger.error("表中字段：{}在类：{}没有对应的属性",name,clazz);
+                }
 			}
 			return bean;
 		} 
