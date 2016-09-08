@@ -42,7 +42,7 @@ public interface PhoenixBase {
      * @author linbingwen
      * @since 2016年8月31日
      */
-    public <T> List<T> findAll(Class<T> clazz);
+    //public <T> List<T> findAll(Class<T> clazz);
 
     /**
      * 根据类的类型和查询条件找到对应的表的所有数据
@@ -53,7 +53,7 @@ public interface PhoenixBase {
      * @author linbingwen
      * @since 2016年8月31日
      */
-    public <T> List<T> findByCondition(Class<T> clazz, Map<String, Object> map);
+    //public <T> List<T> findByCondition(Class<T> clazz, Map<String, Object> map);
 
 
     /**
@@ -65,7 +65,7 @@ public interface PhoenixBase {
      * @author linbingwen
      * @since 2016年8月31日
      */
-    public <T> List<T> findByCondition(Class<T> clazz, String condition);
+    //public <T> List<T> findByCondition(Class<T> clazz, String condition);
 
 
     /**
