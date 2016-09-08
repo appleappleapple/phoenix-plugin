@@ -15,11 +15,12 @@ public interface PhoenixBase {
 
     /**
      * 执行SQL, 也适应于drop table, create table, alter table等ddl操作
-     *
+     * @author linbingwen
      * @param sql
-     * @throws Exception
+     * @throws Exception drop table, create table, alter table等ddl操作
+     * @return 执行成功返回true
      */
-    public void execute(String sql) throws Exception;
+    public boolean execute(String sql) throws Exception;
 
     /**
      * 插入或更新单条记录
@@ -74,7 +75,7 @@ public interface PhoenixBase {
 
     /**
      * 根据指定参数criteria构造过滤条件，获取符合条件的记录。
-     *
+     * @author linbingwen
      * @param clazz
      * @param criteria
      * @param <T>

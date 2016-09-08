@@ -19,6 +19,18 @@ public class PhoenixClinetTest {
 	
 	private static PhoenixClient phoenixClient = new PhoenixClient("uba");
 	
+	
+	@Test
+	public void executeTest() {
+		   String sql = "CREATE TABLE uba.lin_test (id varchar PRIMARY KEY,account varchar ,passwd varchar)";
+		//   String sql = "drop table uba.lin_test";
+		   try {
+			phoenixClient.execute(sql);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@Test
 	public void findBySqlTest() {
 		try {

@@ -3,6 +3,7 @@ package com.github.phoenix.plugin.client;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,9 +48,21 @@ public class PhoenixClient extends PhoenixCommon implements PhoenixBase {
 	}
 
 	@Override
-	public void execute(String sql) throws Exception {
-		// TODO Auto-generated method stub
+	public boolean execute(String sql) throws Exception {
+		Connection connection = null;
+		Statement statement = null;
+		
+		try {
+			connection = connectionFactory.getConnection(id);
+			statement = connection.createStatement();
 
+			return statement.execute(sql);
+		} catch (Exception e) {
+			logger.error("execute for sql = {}执行出错,Exception = {}", sql, e.getLocalizedMessage());
+			throw new Exception(e);
+		} finally {
+			release(connection, statement,null);
+		}
 	}
 
 	@Override
