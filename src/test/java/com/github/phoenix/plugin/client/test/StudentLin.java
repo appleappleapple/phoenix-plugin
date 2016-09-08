@@ -16,12 +16,26 @@ public class StudentLin extends MyBaseEntity {
 	private String newVisitCnt;
 
 	private Integer score;
+	
+	private Integer age;
 
 	private Integer classId;
 
 	public Integer getStuId() {
 		return stuId;
 	}
+
+	public Integer getAge() {
+		return age;
+	}
+
+
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
+
 
 	public void setStuId(Integer stuId) {
 		this.stuId = stuId;

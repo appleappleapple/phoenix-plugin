@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.github.phoenix.plugin.criterion.Criteria;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,18 +23,6 @@ public class PhoenixCommon {
 
 	/* 指定库名 */
 	protected String id;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public static Logger getLogger() {
-		return logger;
-	}
 
 	/**
 	 * 将数据批量放入
@@ -69,7 +58,7 @@ public class PhoenixCommon {
 	 * @return
 	 * @throws Exception
 	 */
-	protected <T> Object get(T object, String propertyName) {
+	protected <T> Object get(T object, String propertyName) throws Exception {
 
 		String methodName = "get";
 		if (propertyName.length() > 1 && Character.isUpperCase(propertyName.charAt(1))) {
@@ -86,8 +75,8 @@ public class PhoenixCommon {
 			return fieldValue;
 
 		} catch (Exception e) {
-			logger.error("", e);
-			throw new RuntimeException(e);
+			logger.info("get value for propertyName:{} from :{} fail,Exception:{}", propertyName, object, e);
+			throw new Exception(e);
 		}
 	}
 
@@ -160,8 +149,9 @@ public class PhoenixCommon {
 	 * @since 2016年8月31日
 	 * @param object
 	 * @return
+	 * @throws Exception
 	 */
-	protected <T> List<String> getColumnNamesIgnoreNull(T object) {
+	protected <T> List<String> getColumnNamesIgnoreNull(T object) throws Exception {
 		List<String> columnNames = new ArrayList<String>();
 
 		Field[] fields = object.getClass().getDeclaredFields();
@@ -234,9 +224,10 @@ public class PhoenixCommon {
 	}
 
 	/**
-	 * 生成带条件的sql语句 
+	 * 生成带条件的sql语句
+	 * 
 	 * @author linbingwen
-	 * @since  2016年8月31日 
+	 * @since 2016年8月31日
 	 * @param tableName
 	 * @param columnNames
 	 * @param map
@@ -244,27 +235,28 @@ public class PhoenixCommon {
 	 */
 	protected String findByConditionSql(String tableName, List<String> columnNames, Map<String, Object> map) {
 		String result = buildfindAllSql(tableName, columnNames) + buildCondition(map);
-		
+
 		logger.debug("findByConditionSql result is {}", result);
 		return result;
 	}
 
 	/**
-	 * 生成条件语句 
+	 * 生成条件语句
+	 * 
 	 * @author linbingwen
-	 * @since  2016年8月31日 
+	 * @since 2016年8月31日
 	 * @param map
 	 * @return
 	 */
 	protected String buildCondition(Map<String, Object> map) {
 		StringBuilder condition = new StringBuilder(" where 1 = 1");
-		
+
 		if (map != null) {
 			for (Map.Entry<String, Object> entry : map.entrySet()) {
-				
+
 				String key = entry.getKey();
 				Object value = entry.getValue();
-				
+
 				if (value instanceof String) {
 					condition.append(" and ").append(StringUtil.camelToUnderline(key)).append(" = '").append(value).append("'");
 				} else {
@@ -272,7 +264,7 @@ public class PhoenixCommon {
 				}
 			}
 		}
-		
+
 		return condition.toString();
 	}
 
@@ -310,50 +302,4 @@ public class PhoenixCommon {
 			}
 		}
 	}
-
-
-	/**
-	 * 执行SQL, 也适应于drop table, create table, alter table等ddl操作
-	 *
-	 * @param sql
-	 * @throws Exception
-	 */
-	public void execute(String sql) throws Exception{}
-
-	public <T> void upsert(T data) throws Exception{}
-
-	public <T> void upsert(List<T> datas) throws Exception{}
-
-	public <T> void upsertIgnoreNull(T data) throws Exception{}
-
-	public <T> void upsertIgnoreNull(List<T> datas) throws Exception{}
-
-
-	/**
-	 * 根据指定参数criteria构造过滤条件，获取符合条件的记录。
-	 *
-	 * @param clazz
-	 * @param criteria
-	 * @param <T>
-	 * @return
-	 */
-	public <T> List<T> find(Class<T> clazz, Criteria criteria){return null;}
-
-
-	/**
-	 * 针对参数化SQL，把map中的值填充到对应的位置，然后执行查询。
-	 *
-	 * @param sql   executable sql, such as: "SELECT A.NAME,A.TYPE FROM TABLEXX
-	 *              WHERE A.NAME = ? "
-	 * @param map   Map object, which loads the prameter values for the
-	 *              sql.
-	 * @param clazz the Class object of BaseEntity which loads the query results.
-	 * @param
-	 * @return
-	 * @throws Exception
-	 */
-	public <T> List<T> find(String sql, Map<Integer, Object> map, Class<T> clazz) throws Exception{
-		return null;
-	}
-
 }

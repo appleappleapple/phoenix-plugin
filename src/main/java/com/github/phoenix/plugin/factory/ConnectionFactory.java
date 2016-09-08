@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.phoenix.plugin.bulider.XMLInstanceBuilder;
-import com.github.phoenix.plugin.config.DatasourceConfig;
+import com.github.phoenix.plugin.config.DataSource;
 
 /**
  * 功能概要：connection工厂类
@@ -23,15 +23,15 @@ public class ConnectionFactory {
 
 	private static Logger logger = LoggerFactory.getLogger(ConnectionFactory.class);
 
-	private List<DatasourceConfig> datasources;
+	private List<DataSource> datasources;
 
 	private List<String> datasourceIds;
 
-	private Map<String, DatasourceConfig> datasourceMaps;
+	private Map<String, DataSource> datasourceMaps;
 
 	private static ConnectionFactory instance;
 
-	static String configFile = "/config/phoenix-source.xml";
+	static String configFile = "/hbase-phoenix.xml";
 
 	static XMLInstanceBuilder xMLInstanceBuilder = new XMLInstanceBuilder();
 
@@ -47,7 +47,7 @@ public class ConnectionFactory {
 		}
 
 		Connection conn = null;
-		DatasourceConfig datasourceConfig = datasourceMaps.get(id);
+		DataSource datasourceConfig = datasourceMaps.get(id);
 
 		if (datasourceConfig == null) {
 			return null;
@@ -66,8 +66,8 @@ public class ConnectionFactory {
 	private void init() {
 		if (datasources != null && !datasources.isEmpty()) {
 			datasourceIds = new ArrayList<String>();
-			datasourceMaps = new HashMap<String, DatasourceConfig>();
-			for (DatasourceConfig datasourceConfig : datasources) {
+			datasourceMaps = new HashMap<String, DataSource>();
+			for (DataSource datasourceConfig : datasources) {
 				datasourceIds.add(datasourceConfig.getId());
 				datasourceMaps.put(datasourceConfig.getId(), datasourceConfig);
 			}
@@ -84,11 +84,11 @@ public class ConnectionFactory {
 		return instance;
 	}
 
-	public List<DatasourceConfig> getDatasourceConfigs() {
+	public List<DataSource> getDatasourceConfigs() {
 		return datasources;
 	}
 
-	public void setDatasourceConfigs(List<DatasourceConfig> datasourceConfigs) {
+	public void setDatasourceConfigs(List<DataSource> datasourceConfigs) {
 		this.datasources = datasourceConfigs;
 	}
 

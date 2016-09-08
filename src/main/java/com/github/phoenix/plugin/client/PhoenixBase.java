@@ -14,61 +14,6 @@ import java.util.Map;
 public interface PhoenixBase {
 
     /**
-     * 插入或更新单条记录（phoenix中插入与更新使用相同命令）
-     * 注意如果有字段为null会忽略不插入
-     *
-     * @param data
-     * @author linbingwen
-     * @since 2016年8月31日
-     */
-    public <T> void save(T data);
-
-    /**
-     * 插入或更新多条记录（phoenix中插入与更新使用相同命令）
-     * 注意如果有字段为null会忽略不插入
-     *
-     * @param data
-     * @author linbingwen
-     * @since 2016年8月31日
-     */
-    public <T> void save(List<T> datas);
-
-
-    /**
-     * 根据类的类型找到对应的表的所有数据
-     *
-     * @param clazz 表对应的vo类或domain类
-     * @return
-     * @author linbingwen
-     * @since 2016年8月31日
-     */
-    //public <T> List<T> findAll(Class<T> clazz);
-
-    /**
-     * 根据类的类型和查询条件找到对应的表的所有数据
-     *
-     * @param clazz 表对应的vo类或domain类
-     * @param map   查询条件
-     * @return
-     * @author linbingwen
-     * @since 2016年8月31日
-     */
-    //public <T> List<T> findByCondition(Class<T> clazz, Map<String, Object> map);
-
-
-    /**
-     * 根据condition 的where语句来查
-     *
-     * @param clazz
-     * @param sql
-     * @return
-     * @author linbingwen
-     * @since 2016年8月31日
-     */
-    //public <T> List<T> findByCondition(Class<T> clazz, String condition);
-
-
-    /**
      * 执行SQL, 也适应于drop table, create table, alter table等ddl操作
      *
      * @param sql
@@ -76,14 +21,56 @@ public interface PhoenixBase {
      */
     public void execute(String sql) throws Exception;
 
+    /**
+     * 插入或更新单条记录
+     * 注意:如果有字段为null,数据库对应字段会设置为null
+     * @author linbingwen
+     * @since  2016年9月8日 
+     * @param data
+     * @throws Exception
+     */
     public <T> void upsert(T data) throws Exception;
 
+    /**
+     * 插入或更新多条记录
+     * 注意:如果有字段为null,数据库对应字段会设置为null
+     * @author linbingwen
+     * @since  2016年9月8日 
+     * @param datas
+     * @throws Exception
+     */
     public <T> void upsert(List<T> datas) throws Exception;
 
+    /**
+     * 插入或更新单条记录
+     * 注意:如果有字段为null,这个字段会忽略不插入
+     * @author linbingwen
+     * @since  2016年9月8日 
+     * @param data
+     * @throws Exception
+     */
     public <T> void upsertIgnoreNull(T data) throws Exception;
 
+    /**
+     * 插入或更新单条记录（phoenix中插入与更新使用相同命令）
+     * 注意:如果有字段为null,这个字段会忽略不插入
+     * @author linbingwen
+     * @since  2016年9月8日 
+     * @param datas
+     * @throws Exception
+     */
     public <T> void upsertIgnoreNull(List<T> datas) throws Exception;
-
+    
+    /**
+     * 根据指定sql查询
+     * 注意：传入sql形如 select * from 表名 where 条件,也支持关联表查询
+     * @author linbingwen
+     * @since  2016年9月8日 
+     * @param clazz 查询结果对应的属性名所在的类
+     * @param sql select 语句
+     * @return
+     */
+    public <T> List<T> find(Class<T> clazz, String sql) throws Exception;
 
     /**
      * 根据指定参数criteria构造过滤条件，获取符合条件的记录。
@@ -93,21 +80,7 @@ public interface PhoenixBase {
      * @param <T>
      * @return
      */
-    public <T> List<T> find(Class<T> clazz, Criteria criteria);
+    public <T> List<T> find(Class<T> clazz, Criteria criteria) throws Exception;
 
-
-    /**
-     * 针对参数化SQL，把map中的值填充到对应的位置，然后执行查询。
-     *
-     * @param sql   executable sql, such as: "SELECT A.NAME,A.TYPE FROM TABLEXX
-     *              WHERE A.NAME = ? "
-     * @param map   Map object, which loads the prameter values for the
-     *              sql.
-     * @param clazz the Class object of BaseEntity which loads the query results.
-     * @param
-     * @return
-     * @throws Exception
-     */
-    public <T> List<T> find(String sql, Map<Integer, Object> map, Class<T> clazz) throws Exception;
 
 }

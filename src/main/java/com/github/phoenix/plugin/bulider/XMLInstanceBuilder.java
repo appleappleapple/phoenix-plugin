@@ -64,6 +64,7 @@ public class XMLInstanceBuilder implements FileInstanceBuilder {
             return ret;
         }
         catch (DocumentException e) {
+        	logger.error("hbase-phoenix.xml 文件不存在或文件定义有错误");
             throw new InstanceBuildException(e);
         }
     }

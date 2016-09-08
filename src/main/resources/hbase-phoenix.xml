@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  id :数据源id, 不能重复 -->
+<!--  driver:表示驱动 -->
+<!--  url:表示连接的地址 -->
+<!--  schema:表示连接的地址 -->
+<config>
+<datasources>
+    <datasource>
+        <id>uba</id>
+        <driver>org.apache.phoenix.jdbc.PhoenixDriver</driver>
+        <url>jdbc:phoenix:sach01-002,sach01-003,sach01-004:currentSchema=uba</url>
+        <schema>uba</schema>
+    </datasource>
+
+
+    <!--<datasource>-->
+        <!--<id>tt</id>-->
+        <!--<driver>org.apache.phoenix.jdbc.PhoenixDriver</driver>-->
+        <!--<url>jdbc:phoenix:sach01-002,sach01-003,sach01-004</url>-->
+        <!--<schema>test</schema>-->
+    <!--</datasource>-->
+
+</datasources>
+</config>

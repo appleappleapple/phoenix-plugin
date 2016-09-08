@@ -11,6 +11,6 @@ import java.sql.ResultSet;
  */
 public interface ResultSetHandler {
 	
-	public Object handler(ResultSet rs);
+	public Object handler(ResultSet rs) throws Exception;
 
 }
