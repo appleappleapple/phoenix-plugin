@@ -57,8 +57,8 @@ public class ConnectionFactory {
 			Class.forName(datasourceConfig.getDriver());
 			conn = DriverManager.getConnection(datasourceConfig.getUrl());
 		} catch (Exception e) {
-			logger.info("fail to jdbc getConnection,exception:{}", e);
-			throw new RuntimeException(e);
+			logger.info("fail to jdbc getConnection,exception:{}", e.getLocalizedMessage());
+			throw e;
 		}
 		return conn;
 	}

@@ -54,7 +54,7 @@ public class BeanListHandler implements ResultSetHandler {
 				list.add(bean);
 			}
 		} catch (Exception e) {
-			throw new Exception(e);
+			throw e;
 		}
 		return list;
 	}

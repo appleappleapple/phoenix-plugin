@@ -27,24 +27,24 @@ public class PhoenixClient extends PhoenixCommon implements PhoenixBase {
 	 * @param id
 	 */
 	public PhoenixClient(String id) {
-		Connection connection = null;
-		try {
-			connection = connectionFactory.getConnection(id);
-
-			if (connection == null) {
-				logger.error("id = {} find connection fail ", id);
-				throw new Exception("not find connection for id " + id);
-			}
+//		Connection connection = null;
+//		try {
+//			connection = connectionFactory.getConnection(id);
+//
+//			if (connection == null) {
+//				logger.error("id = {} find connection fail ", id);
+//				throw new Exception("not find connection for id " + id);
+//			}
 
 			this.id = id;
 
-			logger.debug("connection info is {}", connectionFactory.getConnection(id).toString());
-		} catch (Exception e) {
-			logger.error("init connection error = {}", e.getLocalizedMessage());
-			throw new RuntimeException(e);
-		} finally {
-			release(connection, null, null);
-		}
+//			logger.debug("connection info is {}", connectionFactory.getConnection(id).toString());
+//		} catch (Exception e) {
+//			logger.error("init connection error = {}", e.getLocalizedMessage());
+//			throw new RuntimeException(e);
+//		} finally {
+//			release(connection, null, null);
+//		}
 	}
 
 	@Override
@@ -168,7 +168,7 @@ public class PhoenixClient extends PhoenixCommon implements PhoenixBase {
 			return (List<T>) handle.handler(rs);
 		} catch (Exception e) {
 			logger.error("sql = {}执行出错,Exception = {}", sql, e.getLocalizedMessage());
-			throw new Exception(e);
+			throw e;
 		} finally {
 			release(connection, preState, rs);
 		}
