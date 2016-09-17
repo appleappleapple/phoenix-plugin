@@ -79,6 +79,43 @@ public class PhoenixClinetTest {
 		}
 	}
 	
+//	public static void main(String[] args) {
+//		EvtLogTest();
+//	}
+	
+
+//	public  static void EvtLogTest() {
+//	 try {
+////		EvtLog evtLog = new EvtLog();
+////		evtLog.setUuid("2");
+////		evtLog.setUserId("44");
+////		evtLog.setEvtNo("34");
+////		evtLog.setArea("1");
+////		evtLog.setChnlCode("f");
+////		evtLog.setCity("d");
+////		evtLog.setCountry("2");
+////		evtLog.setCreateTime("ff");
+////		evtLog.setDevNo("d");
+////		evtLog.setDistrict("34");
+////		evtLog.setEvtDate("45");
+////		evtLog.setEvtId("45");
+////		evtLog.setEvtNo("4");
+////		evtLog.setEvtTime("67");
+////		evtLog.setEx("1");
+////		evtLog.setFrPageId("1");
+////		evtLog.setFrPageType("1");
+////		evtLog.setFrPageType("1");
+////		evtLog.setImei("56");
+////		evtLog.setIp("1");
+////		evtLog.setLatitude("567");
+////		phoenixClient.upsert(evtLog);
+//		List<EvtLog> evtLogList = phoenixClient.find(EvtLog.class,"select * from UBA.EVT_LOG ");
+//		
+//		System.out.println("t");
+//	} catch (Exception e) {
+//		e.printStackTrace();
+//	}
+	
 //	@Test
 //	public void
 	
