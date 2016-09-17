@@ -113,7 +113,7 @@ public class PhoenixCommon {
 
 		String tableName = StringUtil.camelToUnderline(results[results.length - 1]);
 
-		logger.info("getTableName for {} is {}", object, tableName);
+		logger.info("phoenixClient getTableName for {} is {}", object, tableName);
 
 		return tableName;
 	}
@@ -137,7 +137,7 @@ public class PhoenixCommon {
 			}
 		}
 
-		logger.info("getColumnNamesWithNull for {} is {}", object, columnNames);
+		logger.info("phoenixClient getColumnNamesWithNull for {} is {}", object, columnNames);
 
 		return columnNames;
 	}
@@ -197,7 +197,7 @@ public class PhoenixCommon {
 		after = new StringBuilder(after.substring(0, after.length() - 1)).append(")");
 		String result = before.append(after).toString();
 
-		logger.debug("buildInserSql result is {}", result);
+		logger.info("phoenixClient buildInserSql result is {}", result);
 		return result;
 	}
 
@@ -219,7 +219,7 @@ public class PhoenixCommon {
 		}
 		sql = new StringBuilder(sql.substring(0, sql.length() - 1)).append(" from ").append(id).append(".").append(tableName);
 
-		logger.debug("buildInserSql result is {}", sql);
+		logger.info("phoenixClient buildInserSql result is {}", sql);
 		return sql.toString();
 	}
 

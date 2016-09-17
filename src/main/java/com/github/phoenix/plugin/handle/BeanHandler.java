@@ -24,7 +24,7 @@ public class BeanHandler implements ResultSetHandler {
 		this.clazz = clazz;
 	}
 
-	public Object handler(ResultSet rs) {
+	public Object handler(ResultSet rs) throws Exception {
 		try {
 			if (!rs.next()) {
 				return null;
@@ -49,10 +49,10 @@ public class BeanHandler implements ResultSetHandler {
                 	logger.error("表中字段：{}在类：{}没有对应的属性",name,clazz);
                 }
 			}
+			
 			return bean;
-		} 
-		catch (Exception e) {
-			throw new RuntimeException(e);
+		} catch (Exception e) {
+			throw e;
 		}
 	}
 

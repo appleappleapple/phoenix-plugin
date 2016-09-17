@@ -56,6 +56,9 @@ public class BeanListHandler implements ResultSetHandler {
 		} catch (Exception e) {
 			throw e;
 		}
+		
+		logger.info("beanListHandler successed the total size is:{}",list.size());
+		
 		return list;
 	}
 }

@@ -27,6 +27,7 @@ public class PhoenixClient extends PhoenixCommon implements PhoenixBase {
 	 * @param id
 	 */
 	public PhoenixClient(String id) {
+		logger.info("init PhoenixClient with id :{}",id);
 //		Connection connection = null;
 //		try {
 //			connection = connectionFactory.getConnection(id);
@@ -55,6 +56,8 @@ public class PhoenixClient extends PhoenixCommon implements PhoenixBase {
 		try {
 			connection = connectionFactory.getConnection(id);
 			statement = connection.createStatement();
+			
+			logger.info("execute sql :{}",sql);
 
 			return statement.execute(sql);
 		} catch (Exception e) {
@@ -95,10 +98,10 @@ public class PhoenixClient extends PhoenixCommon implements PhoenixBase {
 				preState.executeBatch();
 				connection.commit();
 
-				logger.debug("save Lists datas success for sql :{},datas:{}", sql, datas);
+				logger.info("upsert Lists  success for sql :{},total Lists size:{}", sql, datas.size());
 			} catch (Exception e) {
 				logger.error("save datas error = {}", e.getLocalizedMessage());
-				throw new Exception(e);
+				throw  e;
 			} finally {
 				release(connection, preState, null);
 			}
@@ -136,7 +139,7 @@ public class PhoenixClient extends PhoenixCommon implements PhoenixBase {
 				preState.executeBatch();
 				connection.commit();
 
-				logger.debug("save Lists datas success for sql :{},datas:{}", sql, datas);
+				logger.info("upsertIgnoreNull Lists  success for sql :{},lists size is:{}", sql, datas.size());
 			} catch (Exception e) {
 				logger.error("save datas error = {}", e.getLocalizedMessage());
 				throw new Exception(e);
