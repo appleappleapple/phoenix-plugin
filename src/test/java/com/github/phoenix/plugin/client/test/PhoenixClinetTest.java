@@ -22,8 +22,8 @@ public class PhoenixClinetTest {
 	
 	@Test
 	public void executeTest() {
-		   String sql = "CREATE TABLE uba.lin_test (id varchar PRIMARY KEY,account varchar ,passwd varchar)";
-		//   String sql = "drop table uba.lin_test";
+		  // String sql = "CREATE TABLE uba.lin_test (id varchar PRIMARY KEY,account varchar ,passwd varchar)";
+		   String sql = "drop table uba.lin_test";
 		   try {
 			phoenixClient.execute(sql);
 		} catch (Exception e) {

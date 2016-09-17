@@ -5,13 +5,11 @@ import java.util.regex.Pattern;
 
 public class StringUtil {
 	
-	@SuppressWarnings("null")
 	public static boolean isEmpty (String value) {
 		
 		return (value == null || value.length() == 0);
 	}
 	
-	@SuppressWarnings("null")
 	public static boolean isBlank(String value) {
 
 		return (value == null || value.trim().length() == 0);
