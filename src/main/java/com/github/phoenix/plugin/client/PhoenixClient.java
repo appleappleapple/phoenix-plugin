@@ -57,9 +57,10 @@ public class PhoenixClient extends PhoenixCommon implements PhoenixBase {
 			connection = connectionFactory.getConnection(id);
 			statement = connection.createStatement();
 			
-			logger.info("execute sql :{}",sql);
-
-			return statement.execute(sql);
+			logger.info("execute sql :{}", sql);
+			boolean flag = statement.execute(sql);
+			connection.commit();
+			return flag;
 		} catch (Exception e) {
 			logger.error("execute for sql = {}执行出错,Exception = {}", sql, e.getLocalizedMessage());
 			throw new Exception(e);
