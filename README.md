@@ -1,13 +1,13 @@
-#phoenix-plugin使用说明
-##一、概述
+# phoenix-plugin使用说明   
+## 一、概述
 Phoenix-Plugin 是一个使用jdbc封装了操作Hbase的工具类.可以快速的进行增删改查操作
-##二、环境 
+## 二、环境 
 开发环境：Eclipse luna + windows7  
 编译环境：JDK7 + maven
 
-##三、使用配置
+## 三、使用配置
 
-###1、pom文件引入  
+### 1、pom文件引入  
 ```
 <dependency>  
   <groupId>com.github</groupId>  
@@ -15,7 +15,7 @@ Phoenix-Plugin 是一个使用jdbc封装了操作Hbase的工具类.可以快速�
   <version>0.0.1-SNAPSHOT</version>  
 </dependency>  
 ```
-###2、配置数据源
+### 2、配置数据源
 在maven的工程中，在目录src/main/resources添加一个名为hbase-phoenix.xml的文件。如下目录:
 ```
 src
@@ -53,10 +53,10 @@ src
 ```
 注意：Phoenix-Plugin支持多数据源的配置。由于url无法指定使用哪个库，这里用schema代表库名。每一个id对应一个schema（id名可以随便定义，但不要定义两个不同的schema对应到同一个id，这样会以最后一个为基准）
 
-##四、增删查改操作
+## 四、增删查改操作
 
-###1、增和改操作
-####（1）接口
+### 1、增和改操作
+#### （1）接口
 ```
 /**
      * 插入或更新单条记录
@@ -98,13 +98,13 @@ src
      */
     public <T> void upsertIgnoreNull(List<T> datas) throws Exception;
  ```   
-####（2）使用方法
+#### （2）使用方法
 在上面的操作都做了之后就可以到这里。一定要确保表已存在、字段也有！！所以实例化连接对象
 ```
 	PhoenixClinet phoenixClinet = new PhoenixClinet("uba");
 ```
 注意：uba代表上面xml文件中配置的id。根据不同的id连接到不同的数据源
-#####a、使用upsert接口
+##### a、使用upsert接口
 由于phoenix中删除和修改都是使用upsert命令。所以增和改操作调用同一个接口。如下
 ```
 		List<StudentLin> lins = new ArrayList<StudentLin>();
@@ -120,7 +120,7 @@ src
 		phoenixClinet.upsert(lins);
 ```
 upsert接口支持list对象和单个对象存放
-#####b、使用upsertIgnoreNull接口
+##### b、使用upsertIgnoreNull接口
 ```
 		List<StudentLin> lins = new ArrayList<StudentLin>();
 		Random random = new Random();
@@ -134,11 +134,11 @@ upsert接口支持list对象和单个对象存放
 		}
 		phoenixClinet.upsertIgnoreNull(lins);
 ```
-####upsert和upsertIgnoreNull的区别：
+#### upsert和upsertIgnoreNull的区别：
 如果StudentLin有字段为Null,如score。那么upsertIgnoreNull会直接忽略这个字段。
 而upsert会将其设置为null.
 
-####一定要确保表名要和类名对应(陀峰法和下划线对应)
+### #一定要确保表名要和类名对应(陀峰法和下划线对应)
 如：
 ```
       java 类名           表名
@@ -152,8 +152,8 @@ upsert接口支持list对象和单个对象存放
         score                   score
        newVisitCnt      new_visit_cnt
 ```
-###2、查找
-####（1）find接口
+### 2、查找
+#### （1）find接口
 ```
        /**
      * 根据指定sql查询
@@ -176,7 +176,7 @@ upsert接口支持list对象和单个对象存放
      */
     public <T> List<T> find(Class<T> clazz, Criteria criteria) throws Exception;
 ```
-（2）使用方法
+#### （2）使用方法
 ```
 	public void findBySqlTest() {
 		try {
@@ -188,8 +188,8 @@ upsert接口支持list对象和单个对象存放
 		}
 	}
 ```
-###3、直接执行sql语句（如create/drop）
-####(1)接口
+### 3、直接执行sql语句（如create/drop）
+#### (1)接口
 ```
     /**
      * 执行SQL, 也适应于drop table, create table, alter table等ddl操作
@@ -200,7 +200,7 @@ upsert接口支持list对象和单个对象存放
      */
     public boolean execute(String sql) throws Exception;
 ```    
-####（2）使用方法
+#### （2）使用方法
 ```
 	public void executeTest() {
 		  // String sql = "CREATE TABLE uba.lin_test (id varchar PRIMARY KEY,account varchar ,passwd varchar)";
