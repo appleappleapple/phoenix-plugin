@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +36,7 @@ public class ConnectionFactory {
 
 	static String configFile = "/hbase-phoenix.xml";
 
-	private static String propsFile = "hbase-phoenix.properties";
+	private static String propsFile = "/hbase-phoenix.properties";
 
 	static XMLInstanceBuilder xMLInstanceBuilder = new XMLInstanceBuilder();
 
@@ -43,7 +44,7 @@ public class ConnectionFactory {
 
 	static {
 		try {
-			InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(propsFile);
+			InputStream is = ConnectionFactory.class.getResourceAsStream(propsFile);
 			if (is == null) {
 				throw new IOException("Cannot load properties file:" + propsFile);
 			}
