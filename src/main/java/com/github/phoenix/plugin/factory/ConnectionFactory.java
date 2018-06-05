@@ -1,5 +1,7 @@
 package com.github.phoenix.plugin.factory;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.ArrayList;
@@ -15,7 +17,7 @@ import com.github.phoenix.plugin.config.DataSource;
 
 /**
  * 功能概要：connection工厂类
- * 
+ *
  * @author linbingwen
  * @since 2015年12月28日
  */
@@ -33,7 +35,24 @@ public class ConnectionFactory {
 
 	static String configFile = "/hbase-phoenix.xml";
 
+	private static String propsFile = "hbase-phoenix.properties";
+
 	static XMLInstanceBuilder xMLInstanceBuilder = new XMLInstanceBuilder();
+
+	private static Properties props = new Properties();
+
+	static {
+		try {
+			InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(propsFile);
+			if (is == null) {
+				throw new IOException("Cannot load properties file:" + propsFile);
+			}
+			props.load(is);
+			logger.info("Loaded properties from " + propsFile + " successfully...");
+		} catch (IOException e) {
+			logger.error(propsFile + " does not exist! You may need one to configure connection properties..." + e.getMessage());
+		}
+	}
 
 	/** for test **/
 	public static void main(String[] args) throws ClassNotFoundException {
@@ -55,7 +74,7 @@ public class ConnectionFactory {
 
 		try {
 			Class.forName(datasourceConfig.getDriver());
-			conn = DriverManager.getConnection(datasourceConfig.getUrl());
+			conn = DriverManager.getConnection(datasourceConfig.getUrl(), props);
 		} catch (Exception e) {
 			logger.info("fail to jdbc getConnection,exception:{}", e.getLocalizedMessage());
 			throw e;
